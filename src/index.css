@@ -2,41 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Environmental Consulting Design System */
 
 @layer base {
   :root {
+    /* Environmental Color Palette */
+    --primary: 154 65% 19%; /* Dark forest green #2d5a3d */
+    --primary-light: 154 45% 35%; /* Medium green */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 154 25% 85%; /* Light green */
+    --secondary-foreground: 154 65% 19%;
+    
+    --accent: 34 100% 50%; /* Golden accent */
+    --accent-foreground: 0 0% 100%;
+    
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 220 13% 18%; /* Dark charcoal */
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
+    --card-foreground: 220 13% 18%;
+    
+    --muted: 154 15% 95%;
+    --muted-foreground: 220 9% 46%;
+    
+    --border: 154 25% 85%;
+    --input: 154 25% 85%;
+    --ring: 154 65% 19%;
+    
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Environmental Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(154 65% 15%) 0%, hsl(154 45% 25%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(154 65% 19%) 0%, hsl(154 45% 35%) 100%);
+    --gradient-light: linear-gradient(180deg, hsl(154 25% 98%) 0%, hsl(154 15% 95%) 100%);
+    --gradient-overlay: linear-gradient(135deg, hsl(154 65% 15% / 0.9) 0%, hsl(154 45% 25% / 0.8) 100%);
+    
+    /* Shadows & Effects */
+    --shadow-soft: 0 2px 20px hsl(154 65% 19% / 0.1);
+    --shadow-medium: 0 8px 30px hsl(154 65% 19% / 0.15);
+    --shadow-strong: 0 20px 40px hsl(154 65% 19% / 0.2);
+    --glow-green: 0 0 30px hsl(154 65% 19% / 0.3);
+    
+    /* Typography */
+    --font-heading: 'Inter', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -94,12 +111,93 @@ All colors MUST be HSL.
   }
 }
 
+}
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-['Inter',sans-serif] antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Inter',sans-serif] font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground hover:shadow-[var(--glow-green)] transition-[var(--transition-smooth)] px-8 py-4 rounded-xl font-semibold text-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-background text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground transition-[var(--transition-smooth)] px-6 py-3 rounded-lg font-medium;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 transition-[var(--transition-smooth)] px-6 py-3 rounded-lg font-medium;
+  }
+
+  /* Section Styles */
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-[var(--transition-smooth)] hover:shadow-[var(--shadow-medium)] hover:-translate-y-1;
+  }
+
+  /* Stats Counter Animation */
+  .stat-number {
+    @apply text-4xl lg:text-5xl font-bold text-primary-foreground;
+  }
+
+  /* Gradient Overlays */
+  .gradient-overlay {
+    background: var(--gradient-overlay);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-light {
+    background: var(--gradient-light);
+  }
+
+  /* Industry Card Styles */
+  .industry-card {
+    @apply relative overflow-hidden rounded-xl transition-[var(--transition-smooth)] hover:scale-105 cursor-pointer;
+  }
+
+  .industry-card::after {
+    @apply absolute inset-0 bg-primary/20 opacity-0 transition-[var(--transition-smooth)];
+    content: '';
+  }
+
+  .industry-card:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Client Logo Hover */
+  .client-logo {
+    @apply grayscale hover:grayscale-0 transition-[var(--transition-smooth)] opacity-60 hover:opacity-100;
+  }
+
+  /* Scroll animations */
+  .fade-in {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
   }
 }
