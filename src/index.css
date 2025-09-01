@@ -9,6 +9,8 @@
     /* Environmental Color Palette */
     --primary: 154 65% 19%; /* Dark forest green #2d5a3d */
     --primary-light: 154 45% 35%; /* Medium green */
+    --primary-dark: 154 75% 15%; /* Darker green */
+    --primary-darker: 154 85% 12%; /* Even darker green */
     --primary-foreground: 0 0% 100%;
     
     --secondary: 154 25% 85%; /* Light green */
@@ -139,6 +141,10 @@
     @apply bg-accent text-accent-foreground hover:bg-accent/90 transition-[var(--transition-smooth)] px-6 py-3 rounded-lg font-medium;
   }
 
+  .btn-hero-white {
+    @apply bg-white text-primary hover:bg-white/90 transition-[var(--transition-smooth)] px-8 py-4 rounded-xl font-semibold text-lg shadow-[var(--shadow-medium)];
+  }
+
   /* Section Styles */
   .section-padding {
     @apply py-16 lg:py-24;
@@ -148,9 +154,17 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  .section-spacing {
+    @apply py-20 lg:py-28;
+  }
+
   /* Card Hover Effects */
   .card-hover {
     @apply transition-[var(--transition-smooth)] hover:shadow-[var(--shadow-medium)] hover:-translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-[var(--transition-smooth)] hover:scale-105;
   }
 
   /* Stats Counter Animation */
